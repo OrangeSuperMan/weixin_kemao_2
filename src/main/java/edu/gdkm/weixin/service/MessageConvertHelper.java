@@ -31,6 +31,9 @@ public class MessageConvertHelper {
 		type = type.substring(0, type.indexOf("]"));
 		// 获取Java类
 		Class<? extends InMessage> c = typeMap.get(type);
+		if(c==null) {
+			return null;
+		}
 		// 使用JAXB转换
 		@SuppressWarnings("unchecked")
 		T msg = (T) JAXB.unmarshal(new StringReader(xml), c);
