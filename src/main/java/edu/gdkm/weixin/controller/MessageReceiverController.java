@@ -11,6 +11,7 @@ import org.springframework.data.redis.connection.RedisConnection;
 import org.springframework.data.redis.core.RedisCallback;
 import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -34,6 +35,7 @@ public class MessageReceiverController {
 
 	}
 
+	@PostMapping
 	public String onMessage(@RequestBody String xml) throws IOException {
 		LOG.trace("收到的消息原文：\n{}\n--------------", xml);
 		// 转换消息
@@ -58,10 +60,9 @@ public class MessageReceiverController {
 
 		// 2.把序列化后对象放入队列里面
 		String channel = "kemao_2" + inMessage.getMsgType();
-		//直接把对象发送出去，调用ValueSerializer来实现对象的序列化和反序列化
+		// 直接把对象发送出去，调用ValueSerializer来实现对象的序列化和反序列化
 		inMessageTemplate.convertAndSend(channel, inMessage);
-		
-		
+
 //		inMessageTemplate.execute(new RedisCallback<InMessage>(){
 //
 //			@Override
@@ -72,7 +73,7 @@ public class MessageReceiverController {
 //				
 //				return null;
 //			}});
-		
+
 		// 消息队列中的消息
 		// 产生客服消息
 		return "success";
