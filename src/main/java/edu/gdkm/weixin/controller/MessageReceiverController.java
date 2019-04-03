@@ -3,12 +3,9 @@ package edu.gdkm.weixin.controller;
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 import java.io.ObjectOutputStream;
-
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.dao.DataAccessException;
-import org.springframework.data.redis.connection.RedisConnection;
-import org.springframework.data.redis.core.RedisCallback;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -16,7 +13,6 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
-
 import edu.gdkm.weixin.domain.InMessage;
 import edu.gdkm.weixin.service.MessageConvertHelper;
 
@@ -25,6 +21,7 @@ import edu.gdkm.weixin.service.MessageConvertHelper;
 public class MessageReceiverController {
 	// 日志记录器
 	private static final Logger LOG = LoggerFactory.getLogger(MessageReceiverController.class);
+	@Autowired
 	private RedisTemplate<String, ? extends InMessage> inMessageTemplate;
 
 	@GetMapping
