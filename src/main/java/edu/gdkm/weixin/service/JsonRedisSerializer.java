@@ -14,6 +14,7 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 
 import edu.gdkm.weixin.domain.InMessage;
 
+
 public class JsonRedisSerializer<T> extends Jackson2JsonRedisSerializer<T> {
 
 	private ObjectMapper objectMapper = new ObjectMapper();
