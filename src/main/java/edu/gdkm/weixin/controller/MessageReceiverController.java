@@ -35,25 +35,28 @@ public class MessageReceiverController {
 	@PostMapping
 	public String onMessage(@RequestBody String xml) throws IOException {
 		LOG.trace("收到的消息原文：\n{}\n--------------", xml);
+
 		// 转换消息
 		// 转换消息1.获取消息的类型
 //		String type=xml.substring(xml.indexOf("<MsgType><![CDATA[")+18);
 //		type=type.substring(0,type.indexOf("]"));
 
 		InMessage inMessage = MessageConvertHelper.convert(xml);
+
 		// 消息无法转换
 		if (inMessage == null) {
 			LOG.error("消息无法转换！原文：\n{}\n", xml);
 			return "success";
 		}
 		LOG.debug("转换后的消息对象\n{}\n", inMessage);
+
 		// 把消息丢入队列
 		// 1.完成对象的序列化
 		ByteArrayOutputStream bos = new ByteArrayOutputStream(); // 字节输出流
 		ObjectOutputStream out = new ObjectOutputStream(bos);
 		out.writeObject(inMessage);
 
-		byte[] data = bos.toByteArray();
+//		byte[] data = bos.toByteArray();
 
 		// 2.把序列化后对象放入队列里面
 		String channel = "kemao_2" + inMessage.getMsgType();

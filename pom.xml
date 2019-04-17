@@ -25,7 +25,7 @@
 	</properties>
 
 	<dependencies>
-	    <!-- JAXB的API，一般引入Spring、JPA相关的依赖以后，往往都会有 -->
+		<!-- JAXB的API，一般引入Spring、JPA相关的依赖以后，往往都会有 -->
 		<dependency>
 			<groupId>javax.xml.bind</groupId>
 			<artifactId>jaxb-api</artifactId>
@@ -85,6 +85,14 @@
 			<plugin>
 				<groupId>org.springframework.boot</groupId>
 				<artifactId>spring-boot-maven-plugin</artifactId>
+				<configuration>
+					<!-- 可以打包一个可执行jar -->
+					<executable>true</executable>
+					<!-- 创建一个子进程去执行，此时可以使用mvn spring-boot:start启动 -->
+					<!-- 也可以使用mvn spring-boot:stop停止 -->
+					<fork>true</fork>
+					<jmxPort>10001</jmxPort>
+				</configuration>
 			</plugin>
 		</plugins>
 	</build>
