@@ -91,7 +91,7 @@
 					<!-- 创建一个子进程去执行，此时可以使用mvn spring-boot:start启动 -->
 					<!-- 也可以使用mvn spring-boot:stop停止 -->
 					<fork>true</fork>
-					<jmxPort>10001</jmxPort>
+					<jmxPort>19889</jmxPort>
 				</configuration>
 			</plugin>
 		</plugins>
